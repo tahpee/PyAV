@@ -17,3 +17,8 @@ include "libavdevice/avdevice.pxd"
 include "libavformat/avformat.pxd"
 include "libswresample/swresample.pxd"
 include "libswscale/swscale.pxd"
+
+include "libavfilter/avfilter.pxd"
+include "libavfilter/avfiltergraph.pxd"
+include "libavfilter/avcodec.pxd"
+include "libavfilter/buffersink.pxd"

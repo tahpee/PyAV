@@ -1,6 +1,7 @@
 # General.
 .DS_Store
 *~
+.nfs.*
 /venv*
 /vendor
 /.eggs
