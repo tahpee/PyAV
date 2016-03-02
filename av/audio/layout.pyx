@@ -15,7 +15,7 @@ cdef AudioLayout get_audio_layout(int channels, uint64_t c_layout):
 
 
 # These are the defaults given by FFmpeg; Libav is different.
-cdef uint64_t default_layouts[9]
+cdef uint64_t default_layouts[17]
 default_layouts[0] = 0
 default_layouts[1] = lib.AV_CH_LAYOUT_MONO
 default_layouts[2] = lib.AV_CH_LAYOUT_STEREO
@@ -25,6 +25,14 @@ default_layouts[5] = lib.AV_CH_LAYOUT_5POINT0_BACK
 default_layouts[6] = lib.AV_CH_LAYOUT_5POINT1_BACK
 default_layouts[7] = lib.AV_CH_LAYOUT_6POINT1
 default_layouts[8] = lib.AV_CH_LAYOUT_7POINT1
+default_layouts[9] = 0x01ff
+default_layouts[10] = 0x03ff
+default_layouts[11] = 0x07ff
+default_layouts[12] = 0x0fff
+default_layouts[13] = 0x1fff
+default_layouts[14] = 0x3fff
+default_layouts[15] = 0x7fff
+default_layouts[16] = 0xffff
 
 
 # These are the descriptions as given by FFmpeg; Libav does not have them.
@@ -98,9 +106,9 @@ cdef class AudioLayout(object):
     property name:
         """The canonical name of the audio layout."""
         def __get__(self):
-            cdef char out[32]
+            cdef char out[128]
             # Passing 0 as number of channels... fix this later?
-            lib.av_get_channel_layout_string(out, 32, 0, self.layout)
+            lib.av_get_channel_layout_string(out, 128, 0, self.layout)
             return <str>out
 
 
